@@ -27,6 +27,7 @@ import {
 
 import { signUpSchema } from "../schemas";
 import { authClient } from "@/lib/auth-client";
+import Image from "next/image";
 
 export const SignUpForm = () => {
     const router = useRouter();
@@ -83,6 +84,12 @@ export const SignUpForm = () => {
                                         type="button"
                                         disabled={isPending}
                                     >
+                                        <Image
+                                            alt="Github"
+                                            src="/logos/github.svg"
+                                            width={20}
+                                            height={20}
+                                        />
                                         Continue with Github
                                     </Button>
                                     <Button
@@ -91,6 +98,12 @@ export const SignUpForm = () => {
                                         type="button"
                                         disabled={isPending}
                                     >
+                                        <Image
+                                            alt="Google"
+                                            src="/logos/google.svg"
+                                            width={20}
+                                            height={20}
+                                        />
                                         Continue with Google
                                     </Button>
                                 </div>
