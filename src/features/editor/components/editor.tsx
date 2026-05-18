@@ -22,6 +22,8 @@ import { ErrorView, LoadingView } from "@/components/entity-components";
 import { useSuspenseWorkflow } from "@/features/workflows/hooks/use-workflows";
 import { nodeComponents } from '@/config/node-components';
 import { AddNodeButton } from './add-node-button';
+import { useSetAtom } from 'jotai';
+import { editorAtom } from '../store/atoms';
 
 interface Props {
     workflowId: string;
@@ -37,6 +39,9 @@ export const EditorError = () => {
 
 export const Editor = ({ workflowId }: Props) => {
     const { data: workflow } = useSuspenseWorkflow(workflowId);
+
+    const setEditor = useSetAtom(editorAtom);
+
     const [nodes, setNodes] = useState<Node[]>(workflow.nodes);
     const [edges, setEdges] = useState<Edge[]>(workflow.edges);
 
@@ -62,7 +67,13 @@ export const Editor = ({ workflowId }: Props) => {
                 onEdgesChange={onEdgesChange}
                 onConnect={onConnect}
                 nodeTypes={nodeComponents}
+                onInit={setEditor}
                 fitView
+                snapGrid={[10, 10]}
+                snapToGrid
+                panOnScroll
+                panOnDrag={false}
+                selectionOnDrag
             >
                 <Background />
                 <Controls />
